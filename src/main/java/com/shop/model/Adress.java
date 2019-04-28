@@ -19,7 +19,7 @@ public class Adress implements Serializable {
     private String street;
     @Column(name="postal_code")
     private String postCode;
-    @OneToMany(mappedBy = "adress")
+    @OneToMany(mappedBy = "adress",fetch = FetchType.EAGER)
     private List<User> users;
 
     public Adress(){}

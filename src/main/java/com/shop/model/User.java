@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -23,11 +24,18 @@ public class User implements Serializable {
     private String lastName;
     @Email
     private String email;
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    private Set<Order> orders;
     @ManyToOne
     @JoinColumn(name = "adress_id")
     private Adress adress;
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    private Set<Vote> votes;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id_user")},
+            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id_role")})
+    private Set<Role> roles;
 
     public User(){}
 
@@ -87,11 +95,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public List<Order> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 
@@ -101,6 +109,22 @@ public class User implements Serializable {
 
     public void setAdress(Adress adress) {
         this.adress = adress;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
     }
 
     @Override
@@ -113,7 +137,7 @@ public class User implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", orders=" + orders +
-                ", adress=" + adress +
-                '}';
+                ", adress=" +"{Country="+ adress.getCountry()+" ,City="+adress.getCity() +" ,Street="+adress.getStreet() + " ,Post-Code="+ adress.getPostCode()+"}"+
+                ", votes="+votes+'}';
     }
 }

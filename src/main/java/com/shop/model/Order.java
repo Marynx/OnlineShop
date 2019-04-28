@@ -3,9 +3,10 @@ package com.shop.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
-@Table(name="orders")
+@Table(name="`order`")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -14,7 +15,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_order")
     private Long id;
-    private int quantity;
+
     private double price;
     @Column(name = "order_date")
     private Date orderDate;
@@ -23,11 +24,12 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+    @ManyToMany(mappedBy = "orders",fetch = FetchType.EAGER)
+    private List<Item>items;
 
     public Order(){}
 
-    public Order(int quantity, double price, Date orderDate, String orderStatus) {
-        this.quantity = quantity;
+    public Order(double price, Date orderDate, String orderStatus) {
         this.price = price;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
@@ -41,13 +43,6 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public double getPrice() {
         return price;
@@ -81,15 +76,22 @@ public class Order implements Serializable {
         this.user = user;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", quantity=" + quantity +
                 ", price=" + price +
                 ", orderDate=" + orderDate +
                 ", status='" + orderStatus + '\'' +
-                ", user=" + user +
+                ", user=" + user.getLogin() +
                 '}';
     }
 }
