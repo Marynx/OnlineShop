@@ -13,6 +13,7 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
     private Long id;
+    private String role;
     @Column(name = "description")
     private String desc;
     @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER)
@@ -20,8 +21,18 @@ public class Role implements Serializable {
 
     public Role(){}
 
-    public Role(String desc) {
+    public Role(String role,String desc) {
+        this.role=role;
         this.desc = desc;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Long getId() {
@@ -52,6 +63,7 @@ public class Role implements Serializable {
     public String toString() {
         return "Role{" +
                 "id=" + id +
+                ", role='" + role + '\'' +
                 ", desc='" + desc + '\'' +
                 ", users=" + users +
                 '}';
