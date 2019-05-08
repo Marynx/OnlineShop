@@ -14,6 +14,9 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private DataSource dataSource;
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -21,9 +24,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return passwordEncoder;
     }
 
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
+//                .user
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/register").permitAll().anyRequest().authenticated().and().formLogin();
+                .antMatchers("/register").permitAll()
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/plugins/**").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login").permitAll().and().csrf().disable();
     }
 }

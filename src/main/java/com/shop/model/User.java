@@ -3,7 +3,7 @@ package com.shop.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,17 +25,17 @@ public class User implements Serializable {
     @Email
     private String email;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-    private Set<Order> orders;
+    private Set<Order> orders=new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "adress_id")
     private Adress adress;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-    private Set<Vote> votes;
+    private Set<Vote> votes=new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id_user")},
             inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id_role")})
-    private Set<Role> roles;
+    private Set<Role> roles=new HashSet<>();
 
     public User(){}
 
