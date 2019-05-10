@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <title>Sublime</title>
 <meta charset="utf-8">
@@ -50,8 +51,9 @@
 										</ul>
 									</li>
 									<li><a href="#">Accessories</a></li>
-									<li><a href="#">Offers</a></li>
-									<li><a href="contact.html">Contact</a></li>
+									<li sec:authorize="isAuthenticated()"><a th:href="@{/personalData}">Wyloguj</a></li>
+									<li sec:authorize="isAnonymous()"><a th:href="@{login}">Zaloguj</a></li>
+									<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj</a></li>
 								</ul>
 							</nav>
 							<div class="header_extra ml-auto">

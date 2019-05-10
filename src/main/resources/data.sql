@@ -1,1 +1,1 @@
-insert into role(role, description) VALUES ("ROLE_USER", "default role for user"),("ROLE_ADMIN","default role for admin");
+insert into role(role, description) VALUES ("ROLE_USER", "default role for user"),("ROLE_ADMIN","default role for admin"),("ROLE_WORKER","default role for worker");
