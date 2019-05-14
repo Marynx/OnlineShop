@@ -28,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user=userRepository.findByLogin(login);
+
         if(user==null)
             throw new UsernameNotFoundException("Nie znaleziono uzytkownika");
         org.springframework.security.core.userdetails.User userDetails=

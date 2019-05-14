@@ -2,6 +2,7 @@ package com.shop.controller;
 
 import com.shop.model.Adress;
 import com.shop.model.User;
+import com.shop.repository.AdressRepository;
 import com.shop.repository.UserRepository;
 import com.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,15 @@ import java.util.Optional;
 public class UserController {
     private UserService userService;
     private UserRepository userRepository;
+    private AdressRepository adressRepository;
 
     @Autowired
-    public void setUserService(UserService userService, UserRepository userRepository){
+    public void setUserService(UserService userService){
         this.userService=userService;
+    }
+
+    @Autowired
+    public UserController(UserRepository userRepository){
         this.userRepository=userRepository;
     }
 
@@ -55,30 +61,27 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getuser")
-    public String jol(Model model){
-        User user=userRepository.findById(1L).get();
-        System.out.println(user);
+    @GetMapping("/personalData")
+    public String personalData(Principal principal,Model model){
 
-        return "/";
+
+        User user=userRepository.findByLogin(principal.getName());
+        if(user.getAdress()==null){
+            model.addAttribute("adress",new Adress());
+        }else{
+            Adress adress=user.getAdress();
+            model.addAttribute("adress",adress);
+        }
+        System.out.println(user);
+        model.addAttribute("user",user);
+        return "personalData";
     }
 
-    @GetMapping("/personalData")
-    public String personalData(HttpServletRequest request,Model model){
-        String user= request.getUserPrincipal().getName();
-        System.out.println(user);
-
-
-        //        User user=userRepository.findByLogin(principal.getName());
-//        if(user.getAdress()==null){
-//            model.addAttribute("adress",new Adress());
-//        }else{
-//            Adress adress=user.getAdress();
-//            model.addAttribute("adress",adress);
-//        }
-//        System.out.println(user);
-//        model.addAttribute("user",user);
-        return "personalData";
+    @GetMapping("/edit")
+    public String updateUser(Principal principal,Model model){
+        User user=userRepository.findByLogin(principal.getName());
+        model.addAttribute("user",user);
+        return "updateForm";
     }
 
 }

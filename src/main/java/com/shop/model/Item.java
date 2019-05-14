@@ -122,7 +122,7 @@ public class Item implements Serializable {
                 ", version='" + version + '\'' +
                 ", desc='" + desc + '\'' +
                 ", quantity=" + quantity +
-                ", product=" + product.getName() +
+                ", product=" + product +
                 ", votes=" + votes +
                 '}';
     }

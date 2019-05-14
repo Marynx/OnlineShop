@@ -87,7 +87,7 @@ public class Adress implements Serializable {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", postCode='" + postCode + '\'' +
-                ", users=" + users +
+                ", users=" + users.size() +
                 '}';
     }
 }

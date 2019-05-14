@@ -137,7 +137,9 @@ public class User implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", orders=" + orders +
-                ", adress=" +"{Country="+ adress.getCountry()+" ,City="+adress.getCity() +" ,Street="+adress.getStreet() + " ,Post-Code="+ adress.getPostCode()+"}"+
-                ", votes="+votes+'}';
+                //sif(adress!=null) {
+                    ", adress=" +adress//+ "{Country=" + adress.getCountry() + " ,City=" + adress.getCity() + " ,Street=" + adress.getStreet() + " ,Post-Code=" + adress.getPostCode() + "}"
+                //}
+                        +", votes="+votes+'}';
     }
 }
