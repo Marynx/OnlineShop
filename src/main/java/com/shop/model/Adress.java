@@ -2,6 +2,7 @@ package com.shop.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class Adress implements Serializable {
     @Column(name="postal_code")
     private String postCode;
     @OneToMany(mappedBy = "adress",fetch = FetchType.EAGER)
-    private List<User> users;
+    private List<User> users=new ArrayList<>();
 
     public Adress(){}
 

@@ -51,7 +51,7 @@
 										</ul>
 									</li>
 									<li><a href="#">Accessories</a></li>
-									<li sec:authorize="isAuthenticated()"><a th:href="@{/personalData}">Wyloguj</a></li>
+									<li sec:authorize="isAuthenticated()"><a th:href="@{/user/personalData}">Moje Dane</a></li>
 									<li sec:authorize="isAnonymous()"><a th:href="@{login}">Zaloguj</a></li>
 									<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj</a></li>
 								</ul>

@@ -1,8 +1,10 @@
 package com.shop.controller;
 
 import com.shop.model.Adress;
+import com.shop.model.Order;
 import com.shop.model.User;
 import com.shop.repository.AdressRepository;
+import com.shop.repository.OrderRepository;
 import com.shop.repository.UserRepository;
 import com.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +12,20 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
     private UserService userService;
     private UserRepository userRepository;
-    private AdressRepository adressRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
     public void setUserService(UserService userService){
@@ -32,8 +33,9 @@ public class UserController {
     }
 
     @Autowired
-    public UserController(UserRepository userRepository){
+    public UserController(UserRepository userRepository,OrderRepository orderRepository){
         this.userRepository=userRepository;
+        this.orderRepository=orderRepository;
     }
 
 
@@ -64,15 +66,16 @@ public class UserController {
     @GetMapping("/personalData")
     public String personalData(Principal principal,Model model){
 
-
+        System.out.println(principal.getName());
         User user=userRepository.findByLogin(principal.getName());
+        List<Order> orders=orderRepository.findByUser(user);
         if(user.getAdress()==null){
             model.addAttribute("adress",new Adress());
         }else{
             Adress adress=user.getAdress();
             model.addAttribute("adress",adress);
         }
-        System.out.println(user);
+        model.addAttribute("orders",orders);
         model.addAttribute("user",user);
         return "personalData";
     }
@@ -82,6 +85,21 @@ public class UserController {
         User user=userRepository.findByLogin(principal.getName());
         model.addAttribute("user",user);
         return "updateForm";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateUser(@PathVariable("id") Long id,@ModelAttribute @Valid User user, BindingResult bindingResult){
+        User user1=userRepository.findById(id).get();
+        user1.setFirstName(user.getFirstName());
+        user1.setLastName(user.getLastName());
+        user1.setEmail(user.getEmail());
+        if(bindingResult.hasErrors()){
+            user.setId(id);
+            return "personalData";
+        }else{
+            userRepository.save(user1);
+            return "redirect:/user/personalData";
+        }
     }
 
 }

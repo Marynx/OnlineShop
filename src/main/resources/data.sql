@@ -1,3 +1,11 @@
 insert into role(role, description) VALUES ("ROLE_USER", "default role for user"),("ROLE_ADMIN","default role for admin"),("ROLE_WORKER","default role for worker");
 insert into adress(city,country,postal_code,street) values("cos","sss",1223,"sadasd");
-insert into user(email,first_name,lastname,login,password) values ("ads@as.pl","Sdasd","Sdas","asds","sadasd");
+insert into user(email,first_name,lastname,login,password,adress_id) values ("ads@as.pl","Sdasd","Sdas","a","{bcrypt}$2a$10$YmOEfShQ49ODm4eCfVmmKeJ2CtIapMeN08ZiC/k80MddgMx5aHu3W",1);
+insert into user_role(user_id,role_id) values(1,1);
+insert into category(type,description)values("Elektronika","Rzecz elektroniczna");
+insert into producer(name,rating,product_count)values("Samsung",0,0);
+insert into product(name,description,quantity,category_id,producer_id) values ("Samsung s8","Szybki telefon",4,1,1);
+insert into item(price,rating,version,description,quantity,product_id) values(12.20,0,"6GB Ram","Szybki telefon z wiekszym Ram",4,1);
+insert into `order`(user_id,price,order_date,order_status) values(1,20,"2000-12-12","W trakcie realizacji");
+insert into order_item(item_id,order_id) values (1,1);
+insert into vote(score,comment,date,user_id,item_id) values (3,"Moze byc","2001-12-14",1,1);

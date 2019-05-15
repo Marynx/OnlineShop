@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Checkout</title>
+<title>Contact</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-	<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/css/checkout.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/checkout_responsive.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/contact.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/contact_responsive.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/contact_responsive.css}">
 </head>
 <body>
 
@@ -26,7 +23,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="#">Sublime.</a></div>
+							<div class="logo"><a href="#">OtoSklep.</a></div>
 							<nav class="main_nav">
 								<ul>
 									<li class="hassubs active">
@@ -179,7 +176,7 @@
 
 	<div class="home">
 		<div class="home_container">
-			<div class="home_background" th:style="'background:url('+ @{/images/cart.jpg} +');'"></div>
+			<div class="home_background" th:style="'background:url('+ @{/images/contact.jpg} +');'"></div>
 			<div class="home_content_container">
 				<div class="container">
 					<div class="row">
@@ -188,8 +185,7 @@
 								<div class="breadcrumbs">
 									<ul>
 										<li><a href="index.html">Home</a></li>
-										<li><a href="cart.html">Shopping Cart</a></li>
-										<li>Checkout</li>
+										<li>Contact</li>
 									</ul>
 								</div>
 							</div>
@@ -200,101 +196,78 @@
 		</div>
 	</div>
 
-	<!-- Checkout -->
+	<!-- Contact -->
 	
-	<div class="checkout">
+	<div class="contact">
 		<div class="container">
 			<div class="row">
 
-				<!-- Billing Info -->
+				<!-- Get in touch -->
+				<div class="col-lg-8 contact_col">
+					<div class="get_in_touch">
+						<div class="section_title">Zmien swoje dane</div>
+						<div class="section_subtitle">Podaj swoje dane</div>
+						<div class="contact_form_container" th:if="${adress!=null}">
+							<form action="#" th:action="@{/adress/edit/{id}(id=${adress.id})}" method="post" th:object="${adress}" id="contact_form" class="contact_form">
+								<div class="row">
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="city">Miasto</label>
+										<input th:field="*{city}" style="background-color: #9f9f9f" th:text="*{city}" type="text" id="city" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<p th:errors="*{street}">Street errors</p>
+										<label for="street"></label>
+										<input th:field="*{street}" style="background-color: #9f9f9f" th:text="*{street}" type="text" id="street" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="postCode">Kod pocztowy</label>
+										<input th:field="*{postCode}" style="background-color:#9f9f9f" th:text="*{postCode}" type="text" id="postCode" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="country">Kraj</label>
+										<input th:field="*{country}" style="background-color: #9f9f9f" th:text="*{country}" type="text" id="country" class="contact_input" required="required">
+									</div>
+								</div>
+<!--								<input  class="button contact_button" type="submit" value="Sdss">-->
 
-				<div class="col-lg-6" th:if="${adress.id == null}">
-					<div class="billing checkout_section">
-						<div class="section_title">Adres</div>
-						<div class="section_subtitle">Podaj swoj adres</div>
-						<div class="checkout_form_container">
-							<form action="#" th:action="@{/adress}" th:object="${adress}" method="post" id="checkout_form" class="checkout_form">
-								<div>
-									<label for="city">Miasto</label>
-									<input th:field="*{city}" type="text" id="city" class="checkout_input">
-								</div>
-								<div>
-									<label for="street">Ulica</label>
-									<input th:field="*{street}" type="text" id="street" class="checkout_input">
-								</div>
-								<div>
-									<label for="postCode">Kod Pocztowy</label>
-									<input th:field="*{postCode}" type="text" id="postCode" class="checkout_input">
-								</div>
-								<div>
-									<label for="country">Kraj</label>
-									<input th:field="*{country}" type="text" id="country" class="checkout_input">
-								</div>
 							</form>
+							<button class="button contact_button" type="submit" form="contact_form" value="Submit"><span>Edytuj dane</span></button>
 						</div>
-					</div>
-					<button class="button contact_button" type="submit" form="checkout_form" value="Submit"><span>Dodaj adres</span></button>
-				</div>
+                        <div class="contact_form_container" th:if="${user!=null}">
+                            <form action="#" th:action="@{/user/edit/{id}(id=${user.id})}" method="post" th:object="${user}" id="contact_for" class="contact_form">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <!-- Name -->
+                                        <label th:field="*{login}">Login</label>
+                                        <div class="section_title" th:field="*{login}" th:text="*{login}"></div>
+<!--                                        <input th:field="*{login}" style="background-color: #9f9f9f" th:text="*{login}" type="text" id="login" class="contact_input" required="required">-->
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <!-- Name -->
+                                        <p th:errors="*{firstName}">Imie</p>
+                                        <label for="firstName"></label>
+                                        <input th:field="*{firstName}" style="background-color: #9f9f9f" th:text="*{firstName}" type="text" id="firstName" class="contact_input" required="required">
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <!-- Name -->
+                                        <label for="lastName">Nazwisko</label>
+                                        <input th:field="*{lastName}" style="background-color:#9f9f9f" th:text="*{lastName}" type="text" id="lastName" class="contact_input" required="required">
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <!-- Name -->
+                                        <label for="email">Email</label>
+                                        <input th:field="*{email}" style="background-color: #9f9f9f" th:text="*{email}" type="text" id="email" class="contact_input" required="required">
+                                    </div>
+                                </div>
+                                <!--								<input  class="button contact_button" type="submit" value="Sdss">-->
 
-				<div th:if="${adress.id!=null}">
-					<div class="col-lg-4 offset-xl-2 contact_col">
-						<div class="contact_info">
-							<div class="contact_info_section">
-								<div class="contact_info_title" style="font-size:40px">Dane adresowe:</div>
-								<ul>
-									<li>Miasto: <span th:text="${adress.city}"></span></li>
-									<li>Ulica: <span th:text="${adress.street}"></span></li>
-									<li>Kod pocztowy: <span th:text="${adress.postCode}"></span></li>
-									<li>Kraj: <span th:text="${adress.country}"></span></li>
-								</ul>
-							</div>
-							<div class="button order_button"><a th:href="@{/adress/edit}">Zmien moje dane</a></div>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-lg-4 offset-xl-2 contact_col">
-					<div class="contact_info">
-						<div class="contact_info_section">
-							<div class="contact_info_title" style="font-size:40px">Twoje dane:</div>
-							<ul>
-								<li>Imie: <span th:text="${user.firstName}"></span></li>
-								<li>Naziwsko: <span th:text="${user.lastName}"></span></li>
-								<li>Email: <span th:text="${user.email}"></span></li>
-								<li>Login: <span th:text="${user.login}"></span></li>
-							</ul>
-						</div>
-						<div class="button order_button"><a th:href="@{/user/edit}">Zmien moje dane</a></div>
-					</div>
-				</div>
-				<div class = "col-12 p-0">
-					<div class = "jumbotron min-vh-100 text-center d-flex flex-column">
-						<table class="table table-hover table-striped sortable" id="orders">
-							<thead class="thead-dark">
-							<tr>
-								<th scope="col" th:text="'Id'"></th>
-								<th scope="col" th:text="'Desc'"></th>
-								<th scope="col" th:text="'Data zamowienia'"></th>
-								<th scope="col" th:text="'Status'"></th>
-								<th scope="col" th:text="'Cena'"></th>
-								<th scope="col" th:text="'test'"></th>
-							</tr>
-							</thead>
-							<tbody>
-							<th:block th:each="order : ${orders}">
-								<tr th:id="${order.id}" style="font-size:20px;">
-									<td th:text="${order.id}" style="text-align: center;"></td>
-									<td th:text="josjo" style="text-align: center;"></td>
-									<td th:text="${order.orderDate}"></td>
-									<td th:text="${order.orderStatus}"></td>
-									<td th:text="${order.price}"></td>
-									<td><div class="button order_button" style="width:70%;height:70%; margin-top:0"><a th:href="@{/user/edit}">Zmien</a></div></td>
-								</tr>
-							</th:block>
-							</tbody>
-						</table>
-						<div class="button order_button"><a th:href="@{/user/edit}">Zmien</a></div>
+                            </form>
+                            <button class="button contact_button" type="submit" form="contact_for" value="Submit"><span>Edytuj dane</span></button>
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -305,7 +278,7 @@
 	
 	<div class="footer_overlay"></div>
 	<footer class="footer">
-		<div class="footer_background" th:style="'background:url('+ @{/images/footer.jpg} +');'"></div>
+		<div class="footer_background" ></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -338,7 +311,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script th:src="@{/plugins/greensock/animation.gsap.min.js}"></script>
 <script th:src="@{/plugins/greensock/ScrollToPlugin.min.js}"></script>
 <script th:src="@{/plugins/easing/easing.js}"></script>
-<script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
-<script th:src="@{/js/checkout.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
 </body>
 </html>

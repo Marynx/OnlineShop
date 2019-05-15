@@ -99,9 +99,9 @@ public class Product implements Serializable {
                 ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 ", quantity=" + quantity +
-                ", category=" + " ,type="+category.getType() + " ,description="+category.getDesc()+
-                ", producer=" + " id="+producer.getId()+" ,name=" +producer.getName()+" ,rating="+producer.getRating()+
-                " ,product_count=" + producer.getProducCount()+", items=" + items +
+                ", category=" + category+
+                ", producer=" + producer+
+                " ,product_count=" + producer.getProducCount()+", items=" + items.size() +
                 '}';
     }
 }

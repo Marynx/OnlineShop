@@ -123,7 +123,7 @@ public class Item implements Serializable {
                 ", desc='" + desc + '\'' +
                 ", quantity=" + quantity +
                 ", product=" + product +
-                ", votes=" + votes +
+                ", votes=" + votes.size() +
                 '}';
     }
 }

@@ -63,7 +63,7 @@ public class Category implements Serializable {
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", desc='" + desc + '\'' +
-                ", products=" + products +
+                ", products=" + products.size() +
                 '}';
     }
 }

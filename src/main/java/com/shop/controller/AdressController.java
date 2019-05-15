@@ -6,14 +6,15 @@ import com.shop.repository.AdressRepository;
 import com.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
+@RequestMapping("/adress")
 public class AdressController {
     private UserRepository userRepository;
     private AdressRepository adressRepository;
@@ -24,7 +25,7 @@ public class AdressController {
         this.adressRepository=adressRepository;
     }
 
-    @PostMapping("/adress")
+    @PostMapping("")
     public String addAdress(Principal principal, @ModelAttribute @Valid Adress adress, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return "personalData";
@@ -33,7 +34,30 @@ public class AdressController {
             adressRepository.save(adress);
             user.setAdress(adress);
             userRepository.save(user);
-            return "redirect:/";
+            return "redirect:/personalData";
+        }
+    }
+
+    @GetMapping("/edit")
+    public String updateAddress(Principal principal, Model model){
+        User user=userRepository.findByLogin(principal.getName());
+        Adress adress=user.getAdress();
+        System.out.println(adress);
+        model.addAttribute("adress",adress);
+        return "updateForm";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateAddress(@PathVariable("id") Long id, @Valid Adress adress, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            adress.setId(id);
+            return "updateForm";
+        }else{
+            System.out.println(adress);
+           // Adress adress1=adressRepository.findById(adress.getId()).get();
+
+            adressRepository.save(adress);
+            return "redirect:/user/personalData";
         }
     }
 }

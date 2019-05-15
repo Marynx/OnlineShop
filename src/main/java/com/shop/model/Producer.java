@@ -75,7 +75,7 @@ public class Producer implements Serializable {
                 ", name='" + name + '\'' +
                 ", rating=" + rating +
                 ", producCount=" + producCount +
-                ", products=" + products +
+                ", products=" + products.size() +
                 '}';
     }
 }
