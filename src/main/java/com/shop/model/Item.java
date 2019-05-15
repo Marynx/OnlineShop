@@ -31,6 +31,8 @@ public class Item implements Serializable {
             inverseJoinColumns = {@JoinColumn(name="order_id", referencedColumnName="id_order")})
     private Set<Order> orders;
 
+    private int orderQuantity;
+
     public Item(){}
 
     public Item(double price, double rating, String version, String desc, int quantity) {

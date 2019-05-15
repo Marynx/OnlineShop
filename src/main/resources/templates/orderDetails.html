@@ -208,88 +208,32 @@
 
 				<!-- Billing Info -->
 
-				<div class="col-lg-6" th:if="${adress.id == null}">
-					<div class="billing checkout_section">
-						<div class="section_title">Adres</div>
-						<div class="section_subtitle">Podaj swoj adres</div>
-						<div class="checkout_form_container">
-							<form action="#" th:action="@{/adress}" th:object="${adress}" method="post" id="checkout_form" class="checkout_form">
-								<div>
-									<label for="city">Miasto</label>
-									<input th:field="*{city}" type="text" id="city" class="checkout_input">
-								</div>
-								<div>
-									<label for="street">Ulica</label>
-									<input th:field="*{street}" type="text" id="street" class="checkout_input">
-								</div>
-								<div>
-									<label for="postCode">Kod Pocztowy</label>
-									<input th:field="*{postCode}" type="text" id="postCode" class="checkout_input">
-								</div>
-								<div>
-									<label for="country">Kraj</label>
-									<input th:field="*{country}" type="text" id="country" class="checkout_input">
-								</div>
-							</form>
-						</div>
-					</div>
-					<button class="button contact_button" type="submit" form="checkout_form" value="Submit"><span>Dodaj adres</span></button>
-				</div>
-
-				<div th:if="${adress.id!=null}">
-					<div class="col-lg-4 offset-xl-2 contact_col">
-						<div class="contact_info">
-							<div class="contact_info_section">
-								<div class="contact_info_title" style="font-size:40px">Dane adresowe:</div>
-								<ul>
-									<li>Miasto: <span th:text="${adress.city}"></span></li>
-									<li>Ulica: <span th:text="${adress.street}"></span></li>
-									<li>Kod pocztowy: <span th:text="${adress.postCode}"></span></li>
-									<li>Kraj: <span th:text="${adress.country}"></span></li>
-								</ul>
-							</div>
-							<div class="button order_button"><a th:href="@{/adress/edit}">Zmien moje dane</a></div>
-						</div>
-					</div>
-				</div>
-
-				<br/>
-				<div class="col-lg-4 offset-xl-2 contact_col">
-					<div class="contact_info">
-						<div class="contact_info_section">
-							<div class="contact_info_title" style="font-size:40px">Twoje dane:</div>
-							<ul>
-								<li>Imie: <span th:text="${user.firstName}"></span></li>
-								<li>Naziwsko: <span th:text="${user.lastName}"></span></li>
-								<li>Email: <span th:text="${user.email}"></span></li>
-								<li>Login: <span th:text="${user.login}"></span></li>
-							</ul>
-						</div>
-						<div class="button order_button"><a th:href="@{/user/edit}">Zmien moje dane</a></div>
-					</div>
-				</div>
 				<div class = "col-12 p-0">
 					<div class = "jumbotron min-vh-100 text-center d-flex flex-column">
 						<table class="table table-hover table-striped sortable" id="orders">
 							<thead class="thead-dark">
 							<tr>
 								<th scope="col" th:text="'Id'"></th>
-								<th scope="col" th:text="'Ilość przedmiotów zamówienia'"></th>
-								<th scope="col" th:text="'Data zamówienia'"></th>
-								<th scope="col" th:text="'Status'"></th>
-								<th scope="col" th:text="'Do zaplaty'"></th>
-								<th scope="col" th:text="'test'"></th>
+								<th scope="col" th:text="'Opis'"></th>
+								<th scope="col" th:text="'Cena'"></th>
+								<th scope="col" th:text="'ilosc'"></th>
+								<th scope="col" th:text="'Ocena'"></th>
+								<th scope="col" th:text="'Wersja'"></th>
+								<th scope="col" th:text="'Kategoria'"></th>
+								<th scope="col" th:text="'Nazwa'"></th>
 							</tr>
 							</thead>
 							<tbody>
-							<th:block th:each="order : ${orders}">
-								<tr th:id="${order.id}" style="font-size:20px;">
-									<td th:text="${order.id}" style="text-align: center;"></td>
-									<td th:text="${order.getItems().size()}" style="text-align: center;"></td>
-									<td th:text="${order.orderDate}"></td>
-									<td th:text="${order.orderStatus}"></td>
-									<td th:text="${order.price}"></td>
-									<td><div class="button order_button" style="width:70%;height:70%; margin:auto"><a th:href="@{/order/{id}(id=${order.id})}">Szczegoly</a></div></td>
+							<th:block th:each="item : ${items}">
+								<tr th:id="${item.id}" style="font-size:20px;">
+									<td th:text="${item.id}" style="text-align: center;"></td>
+									<td th:text="${item.desc}" style="text-align: center;"></td>
+									<td th:text="${item.price}"></td>
+									<td th:text="${item.quantity}"></td>
+									<td th:text="${item.rating}"></td>
+									<td th:text="${item.version}"></td>
+									<td th:text="${item.product.category.type}"></td>
+									<td th:text="${item.product.name}"></td>
 								</tr>
 							</th:block>
 							</tbody>
