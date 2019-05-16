@@ -3,7 +3,9 @@ package com.shop.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="`order`")
@@ -24,8 +26,11 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
-    @ManyToMany(mappedBy = "orders",fetch = FetchType.EAGER)
-    private List<Item>items;
+//    @ManyToMany(mappedBy = "orders",fetch = FetchType.EAGER)
+//    private List<Item>items;
+    @OneToMany(mappedBy = "order")
+    Set<OrderItem> orderItems=new HashSet<>();
+
 
     public Order(){}
 
@@ -76,12 +81,12 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @Override

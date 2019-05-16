@@ -2,29 +2,28 @@ package com.shop.controller;
 
 import com.shop.model.Adress;
 import com.shop.model.Order;
+import com.shop.model.OrderItem;
 import com.shop.model.User;
-import com.shop.repository.AdressRepository;
+import com.shop.repository.OrderItemRepository;
 import com.shop.repository.OrderRepository;
 import com.shop.repository.UserRepository;
 import com.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
     private UserRepository userRepository;
+    private OrderItemRepository orderItemRepository;
     private OrderRepository orderRepository;
 
     @Autowired
@@ -33,8 +32,9 @@ public class UserController {
     }
 
     @Autowired
-    public UserController(UserRepository userRepository,OrderRepository orderRepository){
+    public UserController(UserRepository userRepository,OrderItemRepository orderItemRepository,OrderRepository orderRepository){
         this.userRepository=userRepository;
+        this.orderItemRepository=orderItemRepository;
         this.orderRepository=orderRepository;
     }
 
@@ -68,7 +68,9 @@ public class UserController {
 
         System.out.println(principal.getName());
         User user=userRepository.findByLogin(principal.getName());
+        //List<OrderItem> orders=orderItemRepository.findByUser(user.getId());
         List<Order> orders=orderRepository.findByUser(user);
+        System.out.println(orders);
         if(user.getAdress()==null){
             model.addAttribute("adress",new Adress());
         }else{

@@ -2,6 +2,7 @@ package com.shop.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,11 +26,16 @@ public class Item implements Serializable {
     private Product product;
     @OneToMany(mappedBy = "item",fetch = FetchType.EAGER)
     private Set<Vote>votes;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "order_item",
-            joinColumns = {@JoinColumn(name="item_id", referencedColumnName="id_item")},
-            inverseJoinColumns = {@JoinColumn(name="order_id", referencedColumnName="id_order")})
-    private Set<Order> orders;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "order_item",
+//            joinColumns = {@JoinColumn(name="item_id", referencedColumnName="id_item")},
+//            inverseJoinColumns = {@JoinColumn(name="order_id", referencedColumnName="id_order")})
+//    private Set<Order> orders;
+
+    @OneToMany(mappedBy = "item")
+    Set<OrderItem> orderItems=new HashSet<>();
+    @ManyToMany(mappedBy = "items",fetch = FetchType.EAGER)
+    private Set<Image>images=new HashSet<>();
 
     public Item(){}
 
@@ -39,6 +45,10 @@ public class Item implements Serializable {
         this.version = version;
         this.desc = desc;
         this.quantity = quantity;
+    }
+
+    public void addOrder(OrderItem order){
+        this.orderItems.add(order);
     }
 
     public Long getId() {
@@ -105,12 +115,32 @@ public class Item implements Serializable {
         this.votes = votes;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
+//    public Set<Order> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(Set<Order> orders) {
+//        this.orders = orders;
+//    }
+
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems= orderItems;
+    }
+
+    public void addOrderItem(OrderItem orderItem){
+        this.orderItems.add(orderItem);
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
     }
 
     @Override

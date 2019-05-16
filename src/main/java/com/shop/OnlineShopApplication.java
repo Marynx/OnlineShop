@@ -5,11 +5,13 @@ import com.shop.repository.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.sql.Date;
 import java.util.List;
 
 @SpringBootApplication
+@EnableJpaRepositories("com.shop.repository")
 public class OnlineShopApplication {
 
     public static void main(String[] args) {
