@@ -283,4 +283,18 @@ $(document).ready(function()
 		}
 	}
 
+
+
 });
+function showDesc() {
+	var x= document.getElementById("desc_area");
+	var y= document.getElementById("review_area");
+		x.style.display = "block";
+		y.style.display = "none";
+}
+function showReviews() {
+	var x= document.getElementById("desc_area");
+	var y= document.getElementById("review_area");
+		x.style.display = "none";
+		y.style.display = "block";
+}

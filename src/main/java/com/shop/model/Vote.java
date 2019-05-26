@@ -86,8 +86,6 @@ public class Vote implements Serializable {
                 ", score=" + score +
                 ", comment='" + comment + '\'' +
                 ", date=" + date +
-                ", item=" + item.getVersion() +
-                ", user=" + user.getLogin() +
                 '}';
     }
 }

@@ -16,6 +16,9 @@ insert into `order`(user_id,price,order_date,order_status) values(1,20,"2000-12-
 insert into order_item(item_quantity,id_order,id_item) values (2,1,1);
 insert into order_item(item_quantity,id_order,id_item) values (1,1,2);
 insert into order_item(item_quantity,id_order,id_item) values (3,1,3);
-insert into vote(score,comment,date,user_id,item_id) values (3,"Moze byc","2001-12-14",1,1);
+# insert into vote(score,comment,date,user_id,item_id) values (3,"Moze byc","2001-12-14",1,1);
+# insert into vote(score,comment,date,user_id,item_id) values (2,"Moze dsdf byc","2001-11-14",1,1);
+# insert into vote(score,comment,date,user_id,item_id) values (4,"Moze asd3eqws byc","2004-12-14",1,1);
+# insert into vote(score,comment,date,user_id,item_id) values (4,"Moze asdsdsadsaddas byc","2001-12-14",1,1);
 insert into image(path)values("/images/samsungS8.jpg"),("/images/samsungS81.jpg"),("/images/samsungS82.jpg"),("/images/samsungS83.jpg");
 insert into image_item(image_id,item_id)values(1,1),(2,1),(3,1),(4,1);

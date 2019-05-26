@@ -584,6 +584,7 @@ section
 .search_input::input-placeholder
 {
 	font-size: 14px !important;
+	font-size: 14px !important;
 	font-weight: 400 !important;
 	font-style: italic;
 	color: #767676 !important;
@@ -887,17 +888,20 @@ section
 }
 .details_image_large img
 {
-	width: 50%;
-	height: 50%;
+	max-width: 50%;
+	max-height: 50%;
 	/*max-width: 100%;*/
 }
 .details_image_thumbnails
 {
+	max-width: 60%;
+	max-height: 60%;
 	margin-top: 17px;
 }
 .details_image_thumbnail
 {
 	width: calc((100% - 51px) / 4);
+	/*height: calc((100% - 51px) / 4);*/
 	cursor: pointer;
 }
 .details_image_thumbnail::after
@@ -928,8 +932,8 @@ section
 }
 .details_image_thumbnail img
 {
-	width: 50%;
-	height: 50%;
+	max-width: 50%;
+	max-height: 50%;
 	/*max-width: 100%;*/
 }
 .product_name
@@ -1112,10 +1116,14 @@ section
 {
 	margin-top: 51px;
 	border-top: solid 1px #d0d0d0;
+
+
 }
 .details_share span
 {
 	display: inline-block;
+	font-size: 14px;
+	color: #111111;
 }
 .details_share ul
 {
@@ -1123,47 +1131,84 @@ section
 	margin-top: 31px;
 	margin-left: 41px;
 }
-.details_share ul li
-{
-	display: inline-block;
+.details_share p {
+	font-size: 15px;
+	color: #0056b3;
 }
-.details_share ul li:not(:last-child)
-{
-	margin-right: 18px;
-}
-.details_share ul li a i
-{
-	font-size: 16px;
-	color: #b5b5b5;
-	padding: 5px;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.details_share ul li a i:hover
+
+/*.details_share ul li*/
+/*{*/
+/*	display: inline-block;*/
+/*}*/
+/*.details_share ul li:not(:last-child)*/
+/*{*/
+/*	margin-right: 18px;*/
+/*}*/
+/*.details_share ul li a i*/
+/*{*/
+/*	font-size: 16px;*/
+/*	color: #b5b5b5;*/
+/*	padding: 5px;*/
+/*	-webkit-transition: all 200ms ease;*/
+/*	-moz-transition: all 200ms ease;*/
+/*	-ms-transition: all 200ms ease;*/
+/*	-o-transition: all 200ms ease;*/
+/*	transition: all 200ms ease;*/
+/*}*/
+.details_share ul li a i p:hover
 {
 	color: #1b1b1b;
 }
 .description_row
 {
 	margin-top: 91px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 .description_title
 {
 	display: inline-block;
 	font-size: 24px;
 	font-weight: 500;
-	color: #1b1b1b;
+	/*color: #1b1b1b;*/
 }
 .reviews_title
 {
 	display: inline-block;
 	margin-left: 41px;
 }
-.reviews_title a
+.starrating > input {display: none;}  /* Remove radio buttons */
+
+.starrating > label:before {
+	content: "\f005"; /* Star */
+	margin: 2px;
+	font-size: 2em;
+	font-family: FontAwesome;
+	display: inline-block;
+}
+
+.starrating > label
 {
+	color: #222222; /* Start color when not clicked */
+}
+
+.starrating > input:checked ~ label
+{ color: #ffca08 ; } /* Set yellow color when star checked */
+
+.starrating > input:hover ~ label
+{ color: #ffca08 ;  } /* Set yellow color when star hover */
+/*.reviews_title a*/
+/*{*/
+/*	font-size: 24px;*/
+/*	font-weight: 500;*/
+/*	color: #6c6a74;*/
+/*	-webkit-transition: all 200ms ease;*/
+/*	-moz-transition: all 200ms ease;*/
+/*	-ms-transition: all 200ms ease;*/
+/*	-o-transition: all 200ms ease;*/
+/*	transition: all 200ms ease;*/
+/*}*/
+.reviews_title button{
 	font-size: 24px;
 	font-weight: 500;
 	color: #6c6a74;
@@ -1172,14 +1217,49 @@ section
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
+	background-color: Transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
+	outline:none;
+}
+.description_title button{
+	font-size: 24px;
+	font-weight: 500;
+	color: #6c6a74;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	background-color: Transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
+	outline:none;
 }
 .reviews_title a:hover
+{
+	color: #1b1b1b;
+}
+.description_title a:hover
+{
+	color: #1b1b1b;
+}
+.reviews_title button:hover
+{
+	color: #1b1b1b;
+}
+.description_title button:hover
 {
 	color: #1b1b1b;
 }
 .description_text
 {
 	margin-top: 44px;
+
 }
 
 /*********************************
@@ -1281,6 +1361,33 @@ section
 {
 	background: #1b1b1b;
 }
+
+@media (min-width: 0){
+	.g-pa-30 {
+		padding: 2.14286rem !important;
+	}
+}
+
+.g-bg-secondary {
+	background-color: #fafafa !important;
+}
+
+.u-shadow-v18 {
+	box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+}
+
+.g-color-gray-dark-v4 {
+	color: #777 !important;
+}
+
+.g-font-size-12 {
+	font-size: 0.85714rem !important;
+}
+
+.media-comment {
+	margin-top:20px
+}
+
 
 /*********************************
 8. Newsletter
