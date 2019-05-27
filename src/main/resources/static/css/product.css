@@ -932,8 +932,8 @@ section
 }
 .details_image_thumbnail img
 {
-	max-width: 50%;
-	max-height: 50%;
+	max-width: 100px;
+	max-height: 100px;
 	/*max-width: 100%;*/
 }
 .product_name
@@ -1032,7 +1032,7 @@ section
 .product_quantity input
 {
 	display: block;
-	width: 30px;
+	width: 35px;
 	height: 57px;
 	border: none;
 	outline: none;

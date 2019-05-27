@@ -950,6 +950,7 @@ section
 .cart_item_image div img
 {
 	max-width: 100%;
+	max-height: 163px;
 }
 .cart_item_name_container
 {

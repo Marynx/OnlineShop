@@ -216,7 +216,6 @@
                                 <th scope="col" th:text="'Opis'"></th>
                                 <th scope="col" th:text="'Cena'"></th>
                                 <th scope="col" th:text="'ilosc'"></th>
-                                <th scope="col" th:text="'Ocena'"></th>
                                 <th scope="col" th:text="'Wersja'"></th>
                                 <th scope="col" th:text="'Kategoria'"></th>
                                 <th scope="col" th:text="'Nazwa'"></th>
@@ -229,7 +228,6 @@
                                     <td th:text="${i.item.desc}" style="text-align: center;"></td>
                                     <td th:text="${i.item.price * i.itemQuantity}"></td>
                                     <td th:text="${i.itemQuantity}"></td>
-                                    <td th:text="${i.item.rating}"></td>
                                     <td th:text="${i.item.version}"></td>
                                     <td th:text="${i.item.product.category.type}"></td>
                                     <td th:text="${i.item.product.name}"></td>

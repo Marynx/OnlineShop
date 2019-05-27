@@ -1,6 +1,7 @@
 package com.shop.controller;
 
 import com.shop.model.Item;
+import com.shop.model.OrderItem;
 import com.shop.model.User;
 import com.shop.model.Vote;
 import com.shop.repository.ItemRepository;
@@ -41,6 +42,7 @@ public class ItemController {
     public String showItem(Principal principal,@PathVariable("id") Long id, Model model){
         Item item=itemRepository.findById(id).get();
         Vote vote=new Vote();
+        OrderItem orderItem=new OrderItem();
         List<Vote> votes= voteRepository.findByItem(item);
         boolean userVote=false;
         if(principal!=null){
@@ -59,6 +61,7 @@ public class ItemController {
         model.addAttribute("vote",vote);
         model.addAttribute("votes",votes);
         model.addAttribute("userVote",userVote);
+        model.addAttribute("orderItem",orderItem);
         return "product";
     }
 
