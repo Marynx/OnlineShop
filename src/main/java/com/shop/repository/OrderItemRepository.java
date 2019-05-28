@@ -16,4 +16,9 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Long> {
             "on order_item.id_order=`order`.id_order where user_id=:id",
     nativeQuery = true)
     List<OrderItem> findByUser(@Param("id") Long id);
+
+    @Query(value = "SELECT order_item.* FROM order_item join `order` on order_item.id_order=`order`.id_order" +
+            " where order_status='Nie potwierdzono' and user_id=:id",
+    nativeQuery = true)
+    List<OrderItem> findByCart(@Param("id") Long id);
 }

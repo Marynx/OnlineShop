@@ -35,7 +35,7 @@
 										<ul>
 											<li><a href="categories.html">Categories</a></li>
 											<li><a href="product.html">Product</a></li>
-											<li><a href="cart.html">Cart</a></li>
+											<li><a th:href="@{/cart/my}">Cart</a></li>
 											<li><a href="checkout.html">Check out</a></li>
 											<li><a href="contact.html">Contact</a></li>
 										</ul>
@@ -58,7 +58,7 @@
 							</nav>
 							<div class="header_extra ml-auto">
 								<div class="shopping_cart">
-									<a href="cart.html">
+									<a th:href="@{/cart/my}">
 										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 												 viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
 											<g>
@@ -69,7 +69,8 @@
 													c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
 											</g>
 										</svg>
-										<div>Cart <span>(0)</span></div>
+										<div sec:authorize="isAuthenticated()">Cart <span  th:text="${orderItems.size()}">(0)</span></div>
+										<div sec:authorize="isAnonymous()">Cart <span >(0)</span></div>
 									</a>
 								</div>
 								<div class="search">
@@ -307,78 +308,12 @@
 					<div class="product_grid">
 
 						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img th:src="@{/images/product_1.jpg}" alt=""></div>
+						<div class="product" th:each="item: ${items}">
+							<div class="product_image"><img th:src="@{${item.getFirstPhoto()}}" alt=""></div>
 							<div class="product_extra product_new"><a href="categories.html">New</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img th:src="@{/images/product_2.jpg}" alt=""></div>
-							<div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img th:src="@{/images/product_3.jpg}" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a th:href="@{product.html}">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img th:src="@{images/product_4.jpg}" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img th:src="@{/images/product_5.jpg}" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img th:src="@{/images/product_6.jpg}" alt=""></div>
-							<div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img th:src="@{/images/product_7.jpg}" alt=""></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
-							</div>
-						</div>
-
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="/static/images/product_8.jpg" alt=""></div>
-							<div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
+								<div class="product_title" ><a th:href="@{'/product/'+${item.id}}" th:text="${item.product.name}">Smart Phone</a></div>
+								<div class="product_price" th:text="${item.price}+'zl'">$670</div>
 							</div>
 						</div>
 

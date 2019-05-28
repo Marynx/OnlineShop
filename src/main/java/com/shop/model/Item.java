@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "item")
@@ -35,7 +36,7 @@ public class Item implements Serializable {
     @OneToMany(mappedBy = "item")
     Set<OrderItem> orderItems=new HashSet<>();
     @ManyToMany(mappedBy = "items",fetch = FetchType.EAGER)
-    private Set<Image>images=new HashSet<>();
+    private Set<Image>images=new TreeSet<>();
 
     public Item(){}
 
@@ -113,6 +114,15 @@ public class Item implements Serializable {
 
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
+    }
+
+    public String getFirstPhoto(){
+        String path="";
+        for(Image image:images){
+            path=image.getPath();
+            break;
+        }
+        return path;
     }
 
 //    public Set<Order> getOrders() {

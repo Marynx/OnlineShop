@@ -12,7 +12,7 @@ insert into product(name,description,quantity,category_id,producer_id) values ("
 insert into item(price,rating,version,description,quantity,product_id) values(12.20,0,"6GB Ram","Szybki telefon z wiekszym Ram",4,1);
 insert into item(price,rating,version,description,quantity,product_id) values(20,0,"4GB Ram","Telefon z Srednim Ram",8,2);
 insert into item(price,rating,version,description,quantity,product_id) values(30,0,"2GB Ram","Po prostu xiaomi",5,3);
-insert into `order`(user_id,price,order_date,order_status) values(1,20,"2000-12-12","W trakcie realizacji");
+insert into `order`(user_id,price,order_date,order_status) values(1,20,"2000-12-12","Nie potwierdzono");
 insert into order_item(item_quantity,id_order,id_item) values (2,1,1);
 insert into order_item(item_quantity,id_order,id_item) values (1,1,2);
 insert into order_item(item_quantity,id_order,id_item) values (3,1,3);

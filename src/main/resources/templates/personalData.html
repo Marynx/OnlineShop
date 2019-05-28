@@ -288,7 +288,7 @@
 <!--									<td th:text="${order.}" style="text-align: center;"></td>-->
 									<td th:text="${order.orderDate}"></td>
 									<td th:text="${order.orderStatus}"></td>
-									<td th:text="${order.price}"></td>
+									<td th:text="${order.price}+'zl'"></td>
 									<td><div class="button order_button" style="width:70%;height:70%; margin:auto"><a th:href="@{/order/{id}(id=${order.id})}">Szczegoly</a></div></td>
 								</tr>
 							</th:block>
