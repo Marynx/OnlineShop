@@ -1,7 +1,10 @@
 package com.shop.controller;
 
 
+import com.shop.model.Producer;
+import com.shop.model.Product;
 import com.shop.model.Vote;
+import com.shop.repository.CategoryRepository;
 import com.shop.repository.ItemRepository;
 import com.shop.repository.ProductRepository;
 import com.shop.repository.VoteRepository;
@@ -22,15 +25,24 @@ import java.sql.Date;
 public class ProductController {
     private ProductRepository productRepository;
     private ItemRepository itemRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    public ProductController(ProductRepository productRepository,ItemRepository itemRepository){
+    public ProductController(ProductRepository productRepository,ItemRepository itemRepository,CategoryRepository categoryRepository){
         this.productRepository=productRepository;
         this.itemRepository=itemRepository;
+        this.categoryRepository=categoryRepository;
     }
 
-//    @GetMapping("/add")
-//    public String addProduct(){
-//
-//    }
+    @PostMapping("/add")
+    public String addProduct(@ModelAttribute @Valid Product product){
+        productRepository.save(product);
+        return "redirect:/worker";
+    }
+
+    @GetMapping("/ile")
+    public String test(){
+        System.out.println(categoryRepository.findAll());
+        return "redirect:/worker";
+    }
 }

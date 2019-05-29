@@ -222,19 +222,25 @@
 					<div class="get_in_touch">
 						<div class="section_title">Dane Produktu:</div>
 						<div class="contact_form_container">
-							<form action="#" id="contact_form" class="contact_form">
+							<form action="#" th:action="@{/product/add}" method="post" th:object="${product}" id="product_form" class="contact_form">
 								<div class="row">
 									<label for="name" style="font-size: 19px;">Nazwa</label>
-									<input style="background-color: #9f9f9f" type="text" id="name" class="contact_input" required="required">
+									<input th:field="*{name}" style="background-color: #9f9f9f" type="text" id="name" class="contact_input" required="required">
 
 									<label for="desc" style="font-size: 19px;">Opis</label>
-									<textarea style="background-color: #9f9f9f" id="desc" rows = "5" cols = "50" name = "description" required="required">Opis produktu</textarea>
+									<textarea th:field="*{desc}" style="background-color: #9f9f9f" id="desc" rows = "5" cols = "50" name = "description" required="required">Opis produktu</textarea>
 
 									<label for="category" style="font-size: 19px;">ID Kategoria</label>
-								    <input th:each="category:${categories}" style="background-color: #9f9f9f;height: 10px;" type="radio" id="category" name="category" th:value="${category.id}" class="contact_input" required="required"><p th:text="${category.type}"></p>
+									<select th:field="*{category}" style="background-color: #9f9f9f" name="checkout_city" id="category" class="dropdown_item_select checkout_input" require="required">
+										<option  th:each="category: ${categories}" th:value="${category.id}" th:text="${category.type}"></option>
+									</select>
+<!--								    <input th:each="category:${categories}" style="background-color: #9f9f9f;height: 10px;" type="radio" id="category" name="category" th:value="${category.id}" class="contact_input" required="required">-->
 
 									<label for="producer" style="font-size: 19px;">ID Producent</label>
-                                    <input style="background-color: #9f9f9f" type="number" id="producer" class="contact_input" required="required">
+									<select th:field="*{producer}" style="background-color: #9f9f9f" name="checkout_city" id="producer" class="dropdown_item_select checkout_input" require="required">
+										<option th:each="producer: ${producers}" th:value="${producer.id}" th:text="${producer.name}"></option>
+									</select>
+<!--                                    <input style="background-color: #9f9f9f" type="number" id="producer" class="contact_input" required="required">-->
                                         <!--									<input  style="background-color: #9f9f9f" type="text" id="desc" class="contact_input" required="required">-->
 <!--							<ul>-->
 <!--								<li>Nazwa: <span ></span></li>-->
@@ -245,7 +251,8 @@
 								</div>
 							</form>
 						</div>
-						<div class="button order_button"><a th:href="@{/user/edit}">Dodaj produkt</a></div>
+<!--						<div class="button order_button"><a th:href="@{/user/edit}">Dodaj produkt</a></div>-->
+						<button class="button contact_button" type="submit" form="product_form" value="Submit"><span>Dodaj Produkt</span></button>
 					</div>
 				</div>
 
