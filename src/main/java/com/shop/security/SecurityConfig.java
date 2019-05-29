@@ -40,6 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/user/register").permitAll()
+                .antMatchers("/user/personalData").hasAnyAuthority("ROLE_USER","ROLE_ADMIN","ROLE_WORKER")
+                .antMatchers("/user/**").hasAuthority("ROLE_USER")
+                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/worker/**").hasAuthority("ROLE_WORKER")
                 .antMatchers("/product/**").permitAll()
                 .antMatchers("/resources/**").permitAll()
                 .antMatchers("/static/**").permitAll()
@@ -48,6 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/plugins/**").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login").permitAll().and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll().and().csrf().disable();
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/loginSuccess").failureUrl("/login").permitAll().and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll().and().csrf().disable();
     }
 }

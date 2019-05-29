@@ -8,14 +8,17 @@ import com.shop.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.sql.Date;
 
 
 @Controller
+@RequestMapping("product")
 public class ProductController {
     private ProductRepository productRepository;
     private ItemRepository itemRepository;
@@ -26,6 +29,8 @@ public class ProductController {
         this.itemRepository=itemRepository;
     }
 
-
-
+//    @GetMapping("/add")
+//    public String addProduct(){
+//
+//    }
 }

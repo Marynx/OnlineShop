@@ -245,7 +245,8 @@
 <!--								</div>-->
 							</div>
 <!--								<button class="button cart_button"  type="submit" form="to_cart_form" value="submit">Dodaj</button>-->
-								<button class="newsletter_button trans_200" type="submit" form="to_cart_form" value=""><span>Dodaj</span></button>
+								<button class="newsletter_button trans_200" type="submit" form="to_cart_form" value="" sec:authorize="hasRole('ROLE_USER')"><span>Dodaj</span></button>
+								<h1 sec:authorize="isAnonymous()">Aby dodać do koszyka, musisz się zalogować</h1>
 							</form>
 
 						</div>
@@ -284,7 +285,7 @@
 								<span class="fa fa-star checked" style="color: aliceblue;font-size: 20px; background-color:#4e555b;" th:text="${v.score}"></span>
 							</div>
 						<div sec:authorize="isAuthenticated()">
-						<div class="newsletter">
+						<div class="newsletter" sec:authorize="hasRole('ROLE_USER')">
 							<div class="container">
 								<div class="row">
 									<div class="col">

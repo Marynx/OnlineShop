@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private static final String DEFAULT_ROLE="ROLE_USER";
+    private static final String WORKER_ROLE="ROLE_WORKER";
+    private static final String ADMIN_ROLE="ROLE_ADMIN";
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
@@ -35,6 +37,22 @@ public class UserService {
     public void addWithDefaultRole(User user){
         Role defaultRole=roleRepository.findByRole(DEFAULT_ROLE);
         user.getRoles().add(defaultRole);
+        String password=passwordEncoder.encode(user.getPassword());
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
+    public void addWithWorkerRole(User user){
+        Role workerRole=roleRepository.findByRole(WORKER_ROLE);
+        user.getRoles().add(workerRole);
+        String password=passwordEncoder.encode(user.getPassword());
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
+    public void addWithAdminRole(User user){
+        Role adminRole=roleRepository.findByRole(ADMIN_ROLE);
+        user.getRoles().add(adminRole);
         String password=passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
         userRepository.save(user);

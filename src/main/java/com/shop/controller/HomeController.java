@@ -7,6 +7,8 @@ import com.shop.repository.ItemRepository;
 import com.shop.repository.OrderItemRepository;
 import com.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +55,17 @@ public class HomeController {
         return "login";
     }
 
-
+    @GetMapping("/loginSuccess")
+    public String loginSuccess(Authentication authentication){
+            if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))){
+               return  "redirect:/user";
+            }else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+                return "redirect:/admin";
+            }else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_WORKER"))){
+                return "redirect:/worker";
+            }
+            return "redirect:/";
+    }
 
 
 
