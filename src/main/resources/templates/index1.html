@@ -312,7 +312,7 @@
 							<div class="product_image"><img th:src="@{${item.getFirstPhoto()}}" alt=""></div>
 							<div class="product_extra product_new"><a href="categories.html">New</a></div>
 							<div class="product_content">
-								<div class="product_title" ><a th:href="@{'/product/'+${item.id}}" th:text="${item.product.name}">Smart Phone</a></div>
+								<div class="product_title" ><a th:href="@{'/item/'+${item.id}}" th:text="${item.product.name}">Smart Phone</a></div>
 								<div class="product_price" th:text="${item.price}+'zl'">$670</div>
 							</div>
 						</div>

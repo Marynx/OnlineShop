@@ -65,7 +65,7 @@ public class OrderItemController {
         }
         orderItem.setItem(item);
         orderItemRepository.save(orderItem);
-        return "redirect:/product/"+item_id;
+        return "redirect:/item/"+item_id;
     }
 
     @GetMapping("/my")

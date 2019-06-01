@@ -26,7 +26,7 @@ public class Item implements Serializable {
     @JoinColumn(name = "product_id")
     private Product product;
     @OneToMany(mappedBy = "item",fetch = FetchType.EAGER)
-    private Set<Vote>votes;
+    private Set<Vote>votes=new HashSet<>();
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "order_item",
 //            joinColumns = {@JoinColumn(name="item_id", referencedColumnName="id_item")},
@@ -36,7 +36,7 @@ public class Item implements Serializable {
     @OneToMany(mappedBy = "item")
     Set<OrderItem> orderItems=new HashSet<>();
     @ManyToMany(mappedBy = "items",fetch = FetchType.EAGER)
-    private Set<Image>images=new TreeSet<>();
+    private Set<Image>images=new HashSet<>();
 
     public Item(){}
 

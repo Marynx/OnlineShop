@@ -209,7 +209,7 @@
 					<div class="col-lg-4 offset-xl-2 contact_col">
 						<div class="contact_info">
 							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/product/add}">Dodaj produkt</a></div>
-							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/adress/edit}">Dodaj przedmiot</a></div>
+							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/item/add}">Dodaj przedmiot</a></div>
 							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/adress/edit}">Dodaj producenta</a></div>
 							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/adress/edit}">Przedmioty</a></div>
 							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/adress/edit}">Zamówienia</a></div>
@@ -219,7 +219,7 @@
 
 
 				<div class="col-lg-4 offset-xl-2 contact_col">
-					<div class="get_in_touch">
+					<div class="get_in_touch" id="product_details" style="display: none">
 						<div class="section_title">Dane Produktu:</div>
 						<div class="contact_form_container">
 							<form action="#" th:action="@{/product/add}" method="post" th:object="${product}" id="product_form" class="contact_form">
@@ -240,20 +240,119 @@
 									<select th:field="*{producer}" style="background-color: #9f9f9f" name="checkout_city" id="producer" class="dropdown_item_select checkout_input" require="required">
 										<option th:each="producer: ${producers}" th:value="${producer.id}" th:text="${producer.name}"></option>
 									</select>
-<!--                                    <input style="background-color: #9f9f9f" type="number" id="producer" class="contact_input" required="required">-->
-                                        <!--									<input  style="background-color: #9f9f9f" type="text" id="desc" class="contact_input" required="required">-->
-<!--							<ul>-->
-<!--								<li>Nazwa: <span ></span></li>-->
-<!--								<li>Opis: <span></span></li>-->
-<!--								<li>Kategoria: <span></span></li>-->
-<!--								<li>Producent: <span></span></li>-->
-<!--							</ul>-->
+
 								</div>
 							</form>
 						</div>
 <!--						<div class="button order_button"><a th:href="@{/user/edit}">Dodaj produkt</a></div>-->
 						<button class="button contact_button" type="submit" form="product_form" value="Submit"><span>Dodaj Produkt</span></button>
 					</div>
+<!--					Item-->
+
+					<div class="get_in_touch" id="item_details" style="display: none;" >
+						<div class="section_title">Dane Przedmiotu:</div>
+						<div class="contact_form_container">
+							<form action="#" th:action="@{/item/add}" enctype="multipart/form-data" method="post" th:object="${item}" id="item_form" class="contact_form">
+								<div class="row">
+									<label for="product" style="font-size: 19px;">ID Produktu</label>
+									<select th:field="*{product}" style="background-color: #9f9f9f" name="checkout_city" id="product" class="dropdown_item_select checkout_input" require="required">
+										<option th:each="product: ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+									</select>
+
+									<label for="item_desc" style="font-size: 19px;">Opis</label>
+									<textarea th:field="*{desc}" style="background-color: #9f9f9f" id="item_desc" rows = "5" cols = "50" name = "description" required="required">Opis przedmiotu</textarea>
+
+									<label for="price" style="font-size: 19px;">Cena</label>
+									<input th:field="*{price}" style="background-color: #9f9f9f" type="number" id="price" class="contact_input" required="required">
+
+									<!--								    <input th:each="category:${categories}" style="background-color: #9f9f9f;height: 10px;" type="radio" id="category" name="category" th:value="${category.id}" class="contact_input" required="required">-->
+
+									<label for="version" style="font-size: 19px;">Wersja opis</label>
+									<input th:field="*{version}" style="background-color: #9f9f9f" type="text" id="version" class="contact_input" required="required">
+
+									<label for="quantity" style="font-size: 19px;">Ilosc</label>
+									<input th:field="*{quantity}" style="background-color: #9f9f9f" type="number" id="quantity" class="contact_input" required="required">
+
+
+									<label for="file" class="custom-file-label" style="font-size: 19px;">Wybierz zdjecie</label>
+									<input  style="background-color: #9f9f9f; color: #bd4147;" type="file" id="file" class="" name="file" required="required">
+
+										<label class="custom-file-label" for="file1">Wybierz zdjecie</label>
+										<input style="background-color: #9f9f9f ;color: #bd4147;"  type="file" class="" id="file1"  name="file">
+
+
+										<label class="custom-file-label" for="file2">Wybierz zdjecie</label>
+										<input style="background-color: #9f9f9f;color: #bd4147;" type="file" class="" id="file2"  name="file">
+
+
+										<label class="custom-file-label" for="file3">Wybierz zdjecie</label>
+										<input style="background-color: #9f9f9f;color: #bd4147;" type="file" class="" id="file3"  name="file">
+
+
+<!--									<label for="file" style="font-size: 19px;">Zdjecie</label>-->
+<!--									<input  style="background-color: #9f9f9f" type="file" id="file3"  name="file">-->
+
+								</div>
+							</form>
+						</div>
+						<!--						<div class="button order_button"><a th:href="@{/user/edit}">Dodaj produkt</a></div>-->
+						<button class="button contact_button" type="submit" form="item_form" value="Submit"><span>Dodaj Produkt</span></button>
+					</div>
+
+<!--					Producer-->
+
+					<div class="get_in_touch" id="producer_details" style="display: none;">
+						<div class="section_title">Dane Producenta:</div>
+						<div class="contact_form_container">
+							<form action="#" th:action="@{/producer/add}" method="post" th:object="${producer}" id="producer_form" class="contact_form">
+								<div class="row">
+									<label for="producer_name" style="font-size: 19px;">Wersja opis</label>
+									<input th:field="*{name}" style="background-color: #9f9f9f" type="text" id="producer_name" class="contact_input" required="required">
+
+								</div>
+							</form>
+						</div>
+						<!--						<div class="button order_button"><a th:href="@{/user/edit}">Dodaj produkt</a></div>-->
+						<button class="button contact_button" type="submit" form="producer_form" value="Submit"><span>Dodaj Producenta</span></button>
+					</div>
+
+<!--					ITEMS-->
+<!--					<div class = "col-12 p-0">-->
+<!--						<div class = "jumbotron min-vh-100 text-center d-flex flex-column">-->
+							<h1 th:if="${items.size()==0}">Brak przedmiotow w bazie danych</h1>
+							<table class="table table-hover table-striped sortable" id="items" th:if="${items.size()>0}">
+								<thead class="thead-dark">
+								<tr>
+									<th scope="col" th:text="'Id'"></th>
+									<th scope="col" th:text="'Opis'"></th>
+									<th scope="col" th:text="'Cena'"></th>
+									<th scope="col" th:text="'ilosc'"></th>
+									<th scope="col" th:text="'Wersja'"></th>
+									<th scope="col" th:text="'Kategoria'"></th>
+									<th scope="col" th:text="'Nazwa'"></th>
+									<th scope="col" th:text="'Edycja'"></th>
+								</tr>
+								</thead>
+								<tbody>
+								<th:block th:each="item : ${items}">
+									<tr th:id="${item.id}" style="font-size:20px;">
+										<td th:text="${item.id}" style="text-align: center;"></td>
+										<td th:text="${item.desc}" style="text-align: center;"></td>
+										<td th:text="${item.price}"></td>
+										<td th:text="${item.quantity}"></td>
+										<td th:text="${item.version}"></td>
+										<td th:text="${item.product.category.type}"></td>
+										<td th:text="${item.product.name}"></td>
+										<td><div class="button order_button" style="width:100%;height:70%; margin:auto"><a th:href="@{/item/delete/{id}(id=${item.id})}">Usuń</a></div>
+											<div class="button order_button" style="width:100%;height:70%; margin:auto"><a th:href="@{/item/edit/{id}(id=${item.id})}">Edytuj</a></div></td>
+									</tr>
+								</th:block>
+								</tbody>
+							</table>
+							<!--<div class="button order_button"><a th:href="@{/user/edit}">Zmien</a></div>-->
+<!--						</div>-->
+<!--					</div>-->
+
 				</div>
 
 			</div>

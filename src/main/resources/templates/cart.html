@@ -225,7 +225,7 @@
 								<div><img th:src="@{${item.item.getFirstPhoto()}}" alt=""></div>
 							</div>
 							<div class="cart_item_name_container">
-								<div class="cart_item_name"><a th:href="@{'/product/'+${item.item.id}}"> <span th:text="${item.item.product.name}"></span></a></div>
+								<div class="cart_item_name"><a th:href="@{'/item/'+${item.item.id}}"> <span th:text="${item.item.product.name}"></span></a></div>
 <!--								<div class="cart_item_edit"><a href="#">Edit Product</a></div>-->
 							</div>
 						</div>

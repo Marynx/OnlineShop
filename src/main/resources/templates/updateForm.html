@@ -242,7 +242,7 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <!-- Name -->
-                                        <label th:field="*{login}">Login</label>
+                                        <label th:field="*{login}">ID</label>
                                         <div class="section_title" th:field="*{login}" th:text="*{login}"></div>
 <!--                                        <input th:field="*{login}" style="background-color: #9f9f9f" th:text="*{login}" type="text" id="login" class="contact_input" required="required">-->
                                     </div>
@@ -268,6 +268,58 @@
                             </form>
                             <button class="button contact_button" type="submit" form="contact_for" value="Submit"><span>Edytuj dane</span></button>
                         </div>
+						<div class="contact_form_container" th:if="${item!=null}">
+							<form action="#" th:action="@{/item/edit/{id}(id=${item.id})}" method="post" th:object="${item}" id="item_form" class="contact_form">
+								<div class="row">
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label th:field="*{id}">Login</label>
+										<div class="section_title" th:field="*{id}" th:text="*{id}"></div>
+										<!--                                        <input th:field="*{login}" style="background-color: #9f9f9f" th:text="*{login}" type="text" id="login" class="contact_input" required="required">-->
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<p th:errors="*{desc}"></p>
+										<label for="desc">Opis</label>
+										<input th:field="*{desc}" style="background-color: #9f9f9f" th:text="*{desc}" type="text" id="desc" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="price">Cena</label>
+										<input th:field="*{price}" style="background-color:#9f9f9f" th:text="*{price}" type="number" id="price" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="quantity">Ilosc</label>
+										<input th:field="*{quantity}" style="background-color: #9f9f9f" th:text="*{quantity}" type="number" id="quantity" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="version">Wersja</label>
+										<input th:field="*{version}" style="background-color: #9f9f9f" th:text="*{version}" type="text" id="version" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="version">Zdjecia</label>
+                                        <br/>
+<!--										<input th:field="*{version}" style="background-color: #9f9f9f" th:text="*{version}" type="text" id="version" class="contact_input" required="required">-->
+										<div class="details_image_thumbnail active" style="display: inline-block;" th:each="i:${item.images}" th:data-image="@{${i.path}}"><img style="max-width: 100px;max-height: 100px;" th:src="@{${i.path}}" alt="" >
+                                            <button class="button contact_button" style="width: 50px;height: 50px;" type="submit" value="Submit"><a th:href="@{dd}">Usun</a></button></div>
+									</div>
+<!--									<div class="col-xl-6">-->
+<!--										&lt;!&ndash; Name &ndash;&gt;-->
+<!--										<label for="category">Kategoria</label>-->
+<!--&lt;!&ndash;										<input th:field="*{product.category.type}" style="background-color: #9f9f9f" th:text="*{product.category.type}" type="text" id="category" class="contact_input" required="required">&ndash;&gt;-->
+<!--										<select th:field="*{}"   style="background-color: #9f9f9f;height: 52px;width: 100%;" name="checkout_city" id="category" class="dropdown_item_select checkout_input" require="required">-->
+<!--											<option th:each="product: ${products}" th:selected="${item.product}" th:value="${product.id}" th:text="${product.name}"></option>-->
+<!--										</select>-->
+<!--									</div>-->
+								</div>
+								<!--								<input  class="button contact_button" type="submit" value="Sdss">-->
+
+							</form>
+							<button class="button contact_button" type="submit" form="item_form" value="Submit"><span>Edytuj przedmiot</span></button>
+						</div>
 					</div>
 				</div>
 			</div>

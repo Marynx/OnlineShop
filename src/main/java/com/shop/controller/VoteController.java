@@ -47,6 +47,6 @@ public class VoteController {
         vote.setItem(item);
         voteRepository.save(vote);
 
-        return "redirect:/product/1";
-    }
+        return "redirect:/item/"+item.getId();
+}
 }
