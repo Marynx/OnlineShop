@@ -1,5 +1,6 @@
 package com.shop.repository;
 
+import com.shop.model.Item;
 import com.shop.model.Order;
 import com.shop.model.OrderItem;
 import com.shop.model.User;
@@ -21,4 +22,6 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Long> {
             " where order_status='Nie potwierdzono' and user_id=:id",
     nativeQuery = true)
     List<OrderItem> findByCart(@Param("id") Long id);
+
+    List<OrderItem> findByItem(Item item);
 }

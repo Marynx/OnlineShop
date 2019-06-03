@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -51,6 +52,14 @@ public class OrderController {
         order.setPrice(totalPrice);
         orderRepository.save(order);
         return "redirect:/cart/my";
+    }
+
+    @PostMapping("/status/{id}/{status}")
+    public String changeStatus(@PathVariable("id") Long id,@PathVariable("status") String status){
+        Order order=orderRepository.findById(id).get();
+        order.setOrderStatus(status);
+        orderRepository.save(order);
+        return "redirect:/worker";
     }
 
 }

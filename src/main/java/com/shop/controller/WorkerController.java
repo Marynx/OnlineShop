@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -43,6 +45,7 @@ public class WorkerController {
         List<Category> categories= (List<Category>) categoryRepository.findAll();
         List<Producer> producers= (List<Producer>) producerRepository.findAll();
         List<Product> products= (List<Product>) productRepository.findAll();
+        List<OrderStatus> orderStatuses=new ArrayList<>(Arrays.asList(OrderStatus.values()));
         model.addAttribute("product",new Product());
         model.addAttribute("item",new Item());
         model.addAttribute("producer",new Producer());
@@ -51,6 +54,7 @@ public class WorkerController {
         model.addAttribute("categories",categories);
         model.addAttribute("producers",producers);
         model.addAttribute("products",products);
+        model.addAttribute("orderStatuses",orderStatuses);
         return "workerPane";
     }
 

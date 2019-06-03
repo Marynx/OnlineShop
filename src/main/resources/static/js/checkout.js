@@ -211,3 +211,22 @@ $(document).ready(function()
 	}
 
 });
+function changeStatus(id){
+	//var id_order=document.getElementById("id_order").innerText;
+	var selected=document.getElementById(id+'id');
+	var selectedValue=selected.options[selected.selectedIndex].value;
+
+	// console.log(id);
+	// console.log(selectedValue);
+	// console.log(selected);
+
+	$.ajax({
+		type:'POST',
+		url:'/order/status/'+id+'/'+selectedValue,
+		success: function() {
+			location.reload();
+		}
+	});
+
+
+}

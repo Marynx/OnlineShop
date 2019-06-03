@@ -10,6 +10,8 @@
 <link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" th:href="@{/css/contact.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/contact_responsive.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/checkout.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/checkout_responsive.css}">
 </head>
 <body>
 
@@ -304,8 +306,15 @@
                                         <br/>
 <!--										<input th:field="*{version}" style="background-color: #9f9f9f" th:text="*{version}" type="text" id="version" class="contact_input" required="required">-->
 										<div class="details_image_thumbnail active" style="display: inline-block;" th:each="i:${item.images}" th:data-image="@{${i.path}}"><img style="max-width: 100px;max-height: 100px;" th:src="@{${i.path}}" alt="" >
-                                            <button class="button contact_button" style="width: 50px;height: 50px;" type="submit" value="Submit"><a th:href="@{dd}">Usun</a></button></div>
+                                            <button class="button contact_button" style="width: 50px;height: 50px;" type="submit" value="Submit">
+<!--                                                <form th:method="delete" action="#" id="image_form"  th:action="@{/item/{id}/{id_image}(id=${item.id},id_image=${i.id})}">-->
+<!--                                                    <input type="submit" value="Usuń" style="background-color: white;border: transparent;width: 100%;height: 100%;">-->
+<!--                                                </form>-->
+                                                <a th:href="@{/item/{id}/{id_image}(id=${item.id},id_image=${i.id})}" th:method="post">Usun</a>
+                                            </button>
+                                        </div>
 									</div>
+
 <!--									<div class="col-xl-6">-->
 <!--										&lt;!&ndash; Name &ndash;&gt;-->
 <!--										<label for="category">Kategoria</label>-->
@@ -318,6 +327,20 @@
 								<!--								<input  class="button contact_button" type="submit" value="Sdss">-->
 
 							</form>
+							<div class="contact_form_container">
+								<form action="#" th:action="@{/item/image/{id}(id=${item.id})}" enctype="multipart/form-data" method="post" id="add_image_form" class="contact_form">
+							<div class="row" style="display: inline-grid;">
+							<label class="custom-file-label" for="file">Wybierz zdjecie</label>
+							<input style="background-color: #9f9f9f;color: #bd4147;" type="file" class="" id="file"  name="file">
+								<label class="custom-file-label" for="file1">Wybierz zdjecie</label>
+								<input style="background-color: #9f9f9f;color: #bd4147;" type="file" class="" id="file1"  name="file">
+								<label class="custom-file-label" for="file2">Wybierz zdjecie</label>
+								<input style="background-color: #9f9f9f;color: #bd4147;" type="file" class="" id="file2"  name="file">
+								<button class="button contact_button" type="submit" form="add_image_form" style="height: 30px;width: 100px" value="Submit"><span>Dodaj</span></button>
+							</div>
+								</form>
+
+							</div>
 							<button class="button contact_button" type="submit" form="item_form" value="Submit"><span>Edytuj przedmiot</span></button>
 						</div>
 					</div>
