@@ -208,11 +208,11 @@
 				<div>
 					<div class="col-lg-4 offset-xl-2 contact_col">
 						<div class="contact_info">
-							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/product/add}">Dodaj produkt</a></div>
-							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/item/add}">Dodaj przedmiot</a></div>
-							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/adress/edit}">Dodaj producenta</a></div>
-							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/adress/edit}">Przedmioty</a></div>
-							<div class="button order_button" style="margin-top: 1px;"><a th:href="@{/adress/edit}">Zamówienia</a></div>
+							<div class="button order_button" style="margin-top: 1px;"><a style="color: black;" onclick="showAddProduct()">Dodaj produkt</a></div>
+							<div class="button order_button" style="margin-top: 1px;"><a style="color: black;" onclick="showAddItem()">Dodaj przedmiot</a></div>
+							<div class="button order_button" style="margin-top: 1px;"><a style="color: black;" onclick="showAddProducer()">Dodaj producenta</a></div>
+							<div class="button order_button" style="margin-top: 1px;"><a style="color: black;" onclick="showItems()">Przedmioty</a></div>
+							<div class="button order_button" style="margin-top: 1px;"><a style="color: black;" onclick="showOrders()">Zamówienia</a></div>
 						</div>
 					</div>
 				</div>
@@ -306,7 +306,7 @@
 						<div class="contact_form_container">
 							<form action="#" th:action="@{/producer/add}" method="post" th:object="${producer}" id="producer_form" class="contact_form">
 								<div class="row">
-									<label for="producer_name" style="font-size: 19px;">Wersja opis</label>
+									<label for="producer_name" style="font-size: 19px;">Opis</label>
 									<input th:field="*{name}" style="background-color: #9f9f9f" type="text" id="producer_name" class="contact_input" required="required">
 
 								</div>
@@ -355,7 +355,7 @@
 
 
 					<h1 th:if="${orders.size()==0}">Brak zamowien w bazie danych</h1>
-					<table class="table table-hover table-striped sortable" id="orders" th:if="${orders.size()>0}" >
+					<table class="table table-hover table-striped sortable" id="orders" th:if="${orders.size()>0}" style="display: none">
 						<thead class="thead-dark">
 						<tr>
 							<th scope="col" th:text="'Id'"></th>
