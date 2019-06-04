@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/personalData").hasAnyAuthority("ROLE_USER","ROLE_ADMIN","ROLE_WORKER")
                 .antMatchers("/user/**").hasAuthority("ROLE_USER")
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/worker/**").hasAuthority("ROLE_WORKER")
+                .antMatchers("/worker/**").hasAnyAuthority("ROLE_WORKER","ROLE_ADMIN")
                 .antMatchers("/product/**").permitAll()
                 .antMatchers("/item/**").permitAll()
                 .antMatchers("/resources/**").permitAll()

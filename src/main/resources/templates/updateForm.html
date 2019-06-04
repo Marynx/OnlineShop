@@ -343,6 +343,67 @@
 							</div>
 							<button class="button contact_button" type="submit" form="item_form" value="Submit"><span>Edytuj przedmiot</span></button>
 						</div>
+
+						<div class="contact_form_container" th:if="${userEdit!=null}">
+							<form action="#" th:action="@{/admin/edit/{id}(id=${userEdit.id})}" method="post" th:object="${userEdit}" id="userEdit_form" class="contact_form">
+								<div class="row">
+									<div class="col-xl-6">
+										<!-- Name -->
+										<p th:errors="*{login}"></p>
+										<label for="edit_login">Login</label>
+										<input th:field="*{login}" style="background-color: #9f9f9f" th:text="*{login}" type="text" id="edit_login" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<p th:errors="*{password}"></p>
+										<label for="old_password">Stare haslo</label>
+										<input style="background-color: #9f9f9f"  type="password" name="old_password" id="old_password" class="contact_input">
+										<label for="new_password">Nowe haslo</label>
+										<input style="background-color: #9f9f9f"  type="password" name="new_password" id="new_password" class="contact_input">
+									</div>
+
+									<div class="col-xl-6">
+										<!-- Name -->
+										<p th:errors="*{firstName}"></p>
+										<label for="edit_firstName">Imie</label>
+										<input th:field="*{firstName}" style="background-color: #9f9f9f" th:text="*{firstName}" type="text" id="edit_firstName" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="edit_lastName">Nazwisko</label>
+										<input th:field="*{lastName}" style="background-color:#9f9f9f" th:text="*{lastName}" type="text" id="edit_lastName" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="edit_email">Email</label>
+										<input th:field="*{email}" style="background-color: #9f9f9f" th:text="*{email}" type="text" id="edit_email" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="edit_country">Kraj</label>
+										<input th:field="*{adress.country}" style="background-color: #9f9f9f" th:text="*{adress.country}" type="text" id="edit_country" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="edit_city">Miasto</label>
+										<input th:field="*{adress.city}" style="background-color: #9f9f9f" th:text="*{adress.city}" type="text" id="edit_city" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="edit_street">Ulica</label>
+										<input th:field="*{adress.street}" style="background-color: #9f9f9f" th:text="*{adress.street}" type="text" id="edit_street" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="edit_postCode">Kod Pocztowy</label>
+										<input th:field="*{adress.postCode}" style="background-color: #9f9f9f" th:text="*{adress.postCode}" type="text" id="edit_postCode" class="contact_input" required="required">
+									</div>
+								</div>
+								<!--								<input  class="button contact_button" type="submit" value="Sdss">-->
+
+							</form>
+							<button class="button contact_button" type="submit" form="userEdit_form" value="Submit"><span>Edytuj dane</span></button>
+						</div>
 					</div>
 				</div>
 			</div>

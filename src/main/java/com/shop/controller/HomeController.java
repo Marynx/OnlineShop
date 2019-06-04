@@ -58,7 +58,7 @@ public class HomeController {
     @GetMapping("/loginSuccess")
     public String loginSuccess(Authentication authentication){
             if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))){
-               return  "redirect:/user";
+               return  "redirect:/user/personalData";
             }else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
                 return "redirect:/admin";
             }else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_WORKER"))){

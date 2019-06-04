@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <title>Contact</title>
 <meta charset="utf-8">
@@ -204,7 +205,7 @@
 
 				<!-- Get in touch -->
 				<div class="col-lg-8 contact_col">
-					<div class="get_in_touch">
+					<div class="get_in_touch" sec:authorize="isAnonymous()">
 						<div class="section_title">Zarejestruj sie</div>
 						<div class="section_subtitle">Podaj swoje dane</div>
 						<div class="contact_form_container">
@@ -244,6 +245,7 @@
 							<button class="button contact_button" type="submit" form="contact_form" value="Submit"><span>Zarejestruj</span></button>
 						</div>
 					</div>
+					<h1 sec:authorize="!isAnonymous()">Jestes juz zalogowany</h1>
 				</div>
 			</div>
 		</div>

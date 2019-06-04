@@ -57,4 +57,16 @@ public class UserService {
         user.setPassword(password);
         userRepository.save(user);
     }
+
+    public boolean checkPasswords(User user, String userPassword){
+        if(passwordEncoder.matches(userPassword,user.getPassword()))
+            return true;
+        return false;
+    }
+
+    public void updatePassword(User user,String newPassword){
+        String password=passwordEncoder.encode(newPassword);
+        user.setPassword(password);
+        userRepository.save(user);
+    }
 }

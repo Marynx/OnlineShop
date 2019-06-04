@@ -68,6 +68,7 @@ public class ItemController {
         Vote vote=new Vote();
         OrderItem orderItem=new OrderItem();
         List<Vote> votes= voteRepository.findByItem(item);
+        String path="";
         boolean userVote=false;
         if(principal!=null){
             User user=userRepository.findByLogin(principal.getName());
@@ -78,8 +79,9 @@ public class ItemController {
                 }
             }
         }
-
-        String path=item.getImages().iterator().next().getPath();
+        if(item.getImages().size()!=0) {
+             path= item.getImages().iterator().next().getPath();
+        }
         model.addAttribute("item",item);
         model.addAttribute("path",path);
         model.addAttribute("vote",vote);

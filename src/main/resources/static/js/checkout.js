@@ -235,11 +235,17 @@ function showAddProduct() {
     var producer= document.getElementById("producer_details");
     var item= document.getElementById("item_details");
     var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
     items.style.display = "none";
     orders.style.display = "none";
     producer.style.display = "none";
     item.style.display = "none";
     product.style.display = "contents";
+	worker.style.display = "none";
+	votes.style.display = "none";
+	users.style.display = "none";
 }
 function showAddItem() {
     var items= document.getElementById("items");
@@ -247,11 +253,17 @@ function showAddItem() {
     var producer= document.getElementById("producer_details");
     var item= document.getElementById("item_details");
     var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
     items.style.display = "none";
     orders.style.display = "none";
     producer.style.display = "none";
     item.style.display = "contents";
     product.style.display = "none";
+	worker.style.display = "none";
+	votes.style.display = "none";
+	users.style.display = "none";
 }
 function showAddProducer() {
     var items= document.getElementById("items");
@@ -259,11 +271,17 @@ function showAddProducer() {
     var producer= document.getElementById("producer_details");
     var item= document.getElementById("item_details");
     var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
     items.style.display = "none";
     orders.style.display = "none";
     producer.style.display = "contents";
     item.style.display = "none";
     product.style.display = "none";
+	worker.style.display = "none";
+	votes.style.display = "none";
+	users.style.display = "none";
 }
 function showItems() {
     var items= document.getElementById("items");
@@ -271,11 +289,17 @@ function showItems() {
     var producer= document.getElementById("producer_details");
     var item= document.getElementById("item_details");
     var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
     items.style.display = "contents";
     orders.style.display = "none";
     producer.style.display = "none";
     item.style.display = "none";
     product.style.display = "none";
+	worker.style.display = "none";
+	votes.style.display = "none";
+	users.style.display = "none";
 }
 function showOrders() {
     var items= document.getElementById("items");
@@ -283,12 +307,75 @@ function showOrders() {
     var producer= document.getElementById("producer_details");
     var item= document.getElementById("item_details");
     var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
     items.style.display = "none";
     orders.style.display = "contents";
     producer.style.display = "none";
     item.style.display = "none";
     product.style.display = "none";
+	worker.style.display = "none";
+	votes.style.display = "none";
+	users.style.display = "none";
 }
+function showAddWorker() {
+	var items= document.getElementById("items");
+	var orders= document.getElementById("orders");
+	var producer= document.getElementById("producer_details");
+	var item= document.getElementById("item_details");
+	var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
+	items.style.display = "none";
+	orders.style.display = "none";
+	producer.style.display = "none";
+	item.style.display = "none";
+	product.style.display = "none";
+	worker.style.display = "contents";
+	votes.style.display = "none";
+	users.style.display = "none";
+}
+
+function showUsers() {
+	var items= document.getElementById("items");
+	var orders= document.getElementById("orders");
+	var producer= document.getElementById("producer_details");
+	var item= document.getElementById("item_details");
+	var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
+	items.style.display = "none";
+	orders.style.display = "none";
+	producer.style.display = "none";
+	item.style.display = "none";
+	product.style.display = "none";
+	worker.style.display = "none";
+	votes.style.display = "none";
+	users.style.display = "contents";
+}
+
+function showVotes() {
+	var items= document.getElementById("items");
+	var orders= document.getElementById("orders");
+	var producer= document.getElementById("producer_details");
+	var item= document.getElementById("item_details");
+	var product= document.getElementById("product_details");
+	var worker= document.getElementById("worker_details");
+	var votes= document.getElementById("votes");
+	var users= document.getElementById("users");
+	items.style.display = "none";
+	orders.style.display = "none";
+	producer.style.display = "none";
+	item.style.display = "none";
+	product.style.display = "none";
+	worker.style.display = "none";
+	votes.style.display = "contents";
+	users.style.display = "none";
+}
+
 // function showAddItem() {
 //     var x= document.getElementById("desc_area");
 //     var y= document.getElementById("review_area");
