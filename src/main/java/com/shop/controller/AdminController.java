@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -78,12 +80,14 @@ public class AdminController {
     }
 
     @PostMapping("/add")
-    public String addWorker(@ModelAttribute @Valid User user,BindingResult result, @RequestParam("role") String role ){
+    public ModelAndView addWorker(@ModelAttribute @Valid User user, BindingResult result, @RequestParam("role") String role,
+                                  ModelAndView mav,RedirectAttributes redirectAttributes){
         //userRepository.save(user);
 
         if(result.hasErrors()){
-
-            return "adminPane";
+            redirectAttributes.addFlashAttribute("costam","duzo ich jest");
+            mav.setViewName("redirect:/admin");
+            return mav;
         }
 
         Adress address=user.getAdress();
@@ -96,7 +100,8 @@ public class AdminController {
         }else if(role.equals("ROLE_ADMIN")){
             userService.addWithAdminRole(user);
         }
-        return "redirect:/admin";
+        mav.setViewName("redirect:/admin");
+        return mav;
     }
 
 
