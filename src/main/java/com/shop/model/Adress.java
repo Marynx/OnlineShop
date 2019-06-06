@@ -1,6 +1,7 @@
 package com.shop.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,14 @@ public class Adress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_adress")
     private Long id;
+    @Pattern(regexp = "[A-Z][A-z]*",message = "Kraj musi byc napisany z wielkiej litery")
     private String country;
+    @Pattern(regexp = "[A-Z][A-z]*",message = "Miasto musi byc napisane z wielkiej litery")
     private String city;
+    @Pattern(regexp = "[A-Z][A-z]* [0-9]+",message = "Ulica musi byc napisana z wielkiej litery oraz posiadac numer lokalu")
     private String street;
     @Column(name="postal_code")
+    @Pattern(regexp = "[0-9]{2}-[0-9]{3}",message = "Kod pocztowy musi miec format xx-xxx")
     private String postCode;
     @OneToMany(mappedBy = "adress",fetch = FetchType.EAGER)
     private List<User> users=new ArrayList<>();

@@ -229,6 +229,25 @@ function changeStatus(id){
 	});
 }
 
+function deleteVote(id){
+	//var id_order=document.getElementById("id_order").innerText;
+	//var selected=document.getElementById(id);
+	//var selectedValue=selected.options[selected.selectedIndex].value;
+
+	 //console.log(id);
+	// console.log(selectedValue);
+	// console.log(selected);
+
+
+	$.ajax({
+		type:'POST',
+		url:'/vote/delete/'+id,
+		success: function() {
+			location.reload();
+		}
+	});
+}
+
 function showAddProduct() {
     var items= document.getElementById("items");
     var orders= document.getElementById("orders");
@@ -354,7 +373,7 @@ function showUsers() {
 	product.style.display = "none";
 	worker.style.display = "none";
 	votes.style.display = "none";
-	users.style.display = "contents";
+	users.style.display = "block";
 }
 
 function showVotes() {
@@ -372,7 +391,7 @@ function showVotes() {
 	item.style.display = "none";
 	product.style.display = "none";
 	worker.style.display = "none";
-	votes.style.display = "contents";
+	votes.style.display = "block";
 	users.style.display = "none";
 }
 

@@ -2,6 +2,7 @@ package com.shop.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class User implements Serializable {
     private String login;
     private String password;
     @Column(name = "firstName")
+    @Pattern(regexp = "[A-Z][a-z]*")
     private String firstName;
     @Column(name = "lastname")
     private String lastName;

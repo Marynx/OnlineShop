@@ -8,15 +8,14 @@ import com.shop.repository.UserRepository;
 import com.shop.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
 import java.sql.Date;
 
 @Controller
+@RequestMapping("/vote")
 public class VoteController {
     private VoteRepository voteRepository;
     private ItemRepository itemRepository;
@@ -30,12 +29,12 @@ public class VoteController {
     }
 
 
-    @PostMapping("/vote/{id_item}")
+    @PostMapping("/{id_item}")
     public String addComment(@PathVariable(name="id_item") Long id_item,Principal principal, @ModelAttribute @Valid Vote vote){
         vote.setDate(new Date(System.currentTimeMillis()));
         User user=userRepository.findByLogin(principal.getName());
         vote.setUser(user);
-        System.out.println(vote);
+        //System.out.println(vote);
         Item item=itemRepository.findById(id_item).get();
         if(item.getVotes().size()>0) {
             item.setRating((item.getRating()+vote.getScore())/(item.getVotes().size()+1));
@@ -48,5 +47,11 @@ public class VoteController {
         voteRepository.save(vote);
 
         return "redirect:/item/"+item.getId();
-}
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteVote(@PathVariable("id") Long id){
+        voteRepository.deleteById(id);
+        return "redirect:/admin";
+    }
 }
