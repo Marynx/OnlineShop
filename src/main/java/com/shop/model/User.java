@@ -2,7 +2,9 @@ package com.shop.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,11 +20,13 @@ public class User implements Serializable {
     @Column(name = "id_user")
     private Long id;
     private String login;
+    @Size(min=5,message = "Haslo musi miec przynajmnije 5 znakow")
     private String password;
     @Column(name = "firstName")
-    @Pattern(regexp = "[A-Z][a-z]*")
+    @Pattern(regexp = "[A-Z][a-z]*",message = "Imie musi byc zaczynac sie z duzej litery")
     private String firstName;
     @Column(name = "lastname")
+    @Pattern(regexp = "[A-Z][a-z]*", message = "Naziwsko musi zaczynac sie z duzej litery")
     private String lastName;
     @Email
     private String email;

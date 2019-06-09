@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -55,6 +58,10 @@ public class UserController {
 
     @PostMapping("/register")
     public String addUser(@ModelAttribute @Valid User user, BindingResult bindingResult){
+        if(userRepository.findByLogin(user.getLogin())!=null){
+            return "redirect:/register";
+        }
+
         if(bindingResult.hasErrors())
             return "registerForm";
         else{
@@ -90,18 +97,23 @@ public class UserController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateUser(@PathVariable("id") Long id,@ModelAttribute @Valid User user, BindingResult bindingResult){
+    public ModelAndView updateUser(@PathVariable("id") Long id, @ModelAttribute @Valid User user, BindingResult bindingResult,
+                                   ModelAndView mav, RedirectAttributes redirectAttributes){
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("userError",true);
+            mav.setViewName("redirect:/user/edit");
+            return mav;
+        }
+
         User user1=userRepository.findById(id).get();
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
         user1.setEmail(user.getEmail());
-        if(bindingResult.hasErrors()){
-            user.setId(id);
-            return "personalData";
-        }else{
-            userRepository.save(user1);
-            return "redirect:/user/personalData";
-        }
+
+        userRepository.save(user1);
+
+        mav.setViewName("redirect:/user/personalData");
+        return mav;
     }
 
 }

@@ -14,7 +14,6 @@ public class Producer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producer")
     private Long id;
-    @Pattern(regexp = "[0-9]",message = "cos zle")
     private String name;
     private double rating;
     @Column(name = "product_count")

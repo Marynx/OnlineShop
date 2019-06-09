@@ -25,16 +25,26 @@ public class AdressController {
         this.adressRepository=adressRepository;
     }
 
+//
+//    @GetMapping("/")
+//    public String updateAdress(Principal principal, Model model){
+//        User user=userRepository.findByLogin(principal.getName());
+//        Adress adress=user.getAdress();
+//        System.out.println(adress);
+//        model.addAttribute("adress",adress);
+//        return "updateForm";
+//    }
+
     @PostMapping("")
     public String addAdress(Principal principal, @ModelAttribute @Valid Adress adress, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return "personalData";
+            return "redirect:/user/personalData";
         else{
             User user =userRepository.findByLogin(principal.getName());
             adressRepository.save(adress);
             user.setAdress(adress);
             userRepository.save(user);
-            return "redirect:/personalData";
+            return "redirect:/user/personalData";
         }
     }
 

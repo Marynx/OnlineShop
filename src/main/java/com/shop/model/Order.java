@@ -17,7 +17,6 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_order")
     private Long id;
-
     private double price;
     @Column(name = "order_date")
     private Date orderDate;
